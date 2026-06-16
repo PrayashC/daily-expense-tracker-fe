@@ -1,0 +1,40 @@
+// Font family
+$font-primary: 'Plus Jakarta Sans', sans-serif;
+
+// Font weights
+$font-light: 300;
+$font-medium: 500;
+$font-semibold: 600;
+$font-bold: 700;
+
+// Available sizes
+$font-sizes: (
+  8px: 8px,
+  12px: 12px,
+  14px: 14px,
+  16px: 16px,
+  20px: 20px,
+  22px: 22px,
+  28px: 28px,
+);
+
+// Weight map
+$font-weights: (
+  light: $font-light,
+  medium: $font-medium,
+  semibold: $font-semibold,
+  bold: $font-bold,
+);
+
+@mixin generate-text-classes {
+  @each $weight-name, $weight-value in $font-weights {
+    @each $size-name, $size-value in $font-sizes {
+      .txt-#{$weight-name}-#{$size-name} {
+        font-family: $font-primary;
+        font-weight: $weight-value;
+        font-size: $size-value;
+        line-height: 1.4;
+      }
+    }
+  }
+}

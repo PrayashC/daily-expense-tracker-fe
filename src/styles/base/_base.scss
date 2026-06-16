@@ -1,0 +1,19 @@
+@use 'fonts';
+@use 'color';
+@use 'typography';
+@use 'shadows';
+@use 'gradients';
+
+@include typography.generate-text-classes();
+
+html,
+body {
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}

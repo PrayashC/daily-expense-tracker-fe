@@ -1,0 +1,159 @@
+@use 'variables' as *;
+
+/* ─── txt Colors ─── */
+.txt-primary {
+  color: $primary;
+}
+.txt-secondary {
+  color: $secondary-foreground;
+}
+.txt-accent {
+  color: $accent-foreground;
+}
+.txt-success {
+  color: $success;
+}
+.txt-warning {
+  color: $warning;
+}
+.txt-danger {
+  color: $destructive;
+}
+.txt-info {
+  color: $info;
+}
+.txt-muted {
+  color: $muted-foreground;
+}
+
+/* ─── Background Colors ─── */
+.bg-primary {
+  background-color: $primary;
+  color: $primary-foreground;
+}
+.bg-secondary {
+  background-color: $secondary;
+  color: $secondary-foreground;
+}
+.bg-accent {
+  background-color: $accent;
+  color: $accent-foreground;
+}
+.bg-success {
+  background-color: $success;
+  color: $success-foreground;
+}
+.bg-warning {
+  background-color: $warning;
+  color: #fff;
+}
+.bg-danger {
+  background-color: $destructive;
+  color: $destructive-foreground;
+}
+.bg-info {
+  background-color: $info;
+  color: #fff;
+}
+
+.bg-card {
+  background-color: $card;
+}
+.bg-background {
+  background-color: $background;
+}
+.bg-muted {
+  background-color: $muted;
+}
+
+/* ─── Border Colors ─── */
+.border-primary {
+  border-color: $primary;
+}
+.border-secondary {
+  border-color: $secondary;
+}
+.border-accent {
+  border-color: $accent;
+}
+.border-success {
+  border-color: $success;
+}
+.border-warning {
+  border-color: $warning;
+}
+.border-danger {
+  border-color: $destructive;
+}
+.border-info {
+  border-color: $info;
+}
+.border-muted {
+  border-color: $border;
+}
+
+/* ─── Button Styles ─── */
+.btn-primary {
+  background: $primary;
+  color: $primary-foreground;
+  border: 1px solid $primary;
+
+  &:hover {
+    background: darken($primary, 8%);
+  }
+}
+
+.btn-secondary {
+  background: $secondary;
+  color: $secondary-foreground;
+  border: 1px solid $secondary;
+
+  &:hover {
+    background: darken($secondary, 5%);
+  }
+}
+
+.btn-success {
+  background: $success;
+  color: $success-foreground;
+  border: 1px solid $success;
+}
+
+.btn-danger {
+  background: $destructive;
+  color: $destructive-foreground;
+  border: 1px solid $destructive;
+}
+
+/* ─── Card ─── */
+.card {
+  background: $card;
+  color: $card-foreground;
+  border: 1px solid $border;
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+/* ─── Form Controls ─── */
+.form-control {
+  background: $input-background;
+  border: 1px solid $input;
+  color: $foreground;
+
+  &:focus {
+    outline: none;
+    border-color: $ring;
+    box-shadow: 0 0 0 3px rgba($ring, 0.2);
+  }
+}
+
+/* ─── Semantic Values ─── */
+.income {
+  color: $income;
+  font-weight: 600;
+}
+
+.expense {
+  color: $expense;
+  font-weight: 600;
+}

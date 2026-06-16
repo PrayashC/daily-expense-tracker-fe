@@ -1,0 +1,82 @@
+<div class="flex flex-col items-center">
+  <div class="text-center mb-8">
+    <span class="txt-bold-28px tracking-tight mb-2">Welcome Back!</span>
+    <p class="text-gray-500">Track your daily expenses effortlessly</p>
+  </div>
+
+  <button
+    (click)="toggleForm()"
+    class="px-6 py-3 rounded-2xl bg-yellow-gradient text-white txt-semibold-16px button-shadow-lg hover:opacity-90 transition-opacity"
+  >
+    <i class="fa-solid fa-plus mr-2"></i>
+    {{ showForm ? 'Cancel' : "Enter Today's Expense" }}
+  </button>
+
+  @if (showForm) {
+    <div class="mt-8 w-full max-w-md">
+      <form [formGroup]="expenseForm" (ngSubmit)="addExpenseEntry()" class="space-y-4">
+        <div>
+          <label for="description" class="block txt-semibold-14px text-black mb-1"
+            >Description</label
+          >
+          <input
+            type="text"
+            formControlName="description"
+            placeholder="e.g. Lunch, Groceries..."
+            class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-yellow-400 focus:ring-2 focus:ring-yellow-100 outline-none transition-all"
+          />
+        </div>
+
+        <div>
+          <label for="amount" class="block txt-semibold-14px text-black mb-1">Amount</label>
+          <input
+            type="number"
+            formControlName="amount"
+            placeholder="e.g. 250.00"
+            step="0.01"
+            min="0.01"
+            class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-yellow-400 focus:ring-2 focus:ring-yellow-100 outline-none transition-all"
+          />
+        </div>
+
+        <button
+          type="submit"
+          [disabled]="expenseForm.invalid"
+          class="w-full py-3 rounded-2xl bg-yellow-gradient text-white font-semibold button-shadow-lg hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          <i class="fa-solid fa-check mr-2"></i>
+          Add Expense
+        </button>
+      </form>
+
+      @if (errorMessage) {
+        <div class="mt-4 p-3 rounded-xl text-center txt-medium-14px bg-red-50 text-red-700">
+          {{ errorMessage }}
+        </div>
+      }
+    </div>
+  }
+
+  @if (!showForm) {
+    <div class="mt-8 w-full max-w-md">
+      <h2 class="txt-semibold-20px mb-4 text-gray-800">Today's Expenses</h2>
+      <div class="space-y-3 h-40 md:h-70 overflow-auto">
+        @if (expenses().length > 0) {
+          @for (expense of expenses(); track expense) {
+            <div
+              class="p-4 rounded-xl bg-gray-50 border border-gray-200 flex justify-between items-center"
+            >
+              <div>
+                <p class="font-medium text-gray-800">{{ expense.description }}</p>
+                <p class="text-xs text-gray-400 mt-1">{{ expense.entryDate | date: 'short' }}</p>
+              </div>
+              <span class="text-yellow-600 font-semibold text-lg">₹{{ expense.amount }}</span>
+            </div>
+          }
+        } @else {
+          <span class="text-gray-400"> No entry logged today </span>
+        }
+      </div>
+    </div>
+  }
+</div>

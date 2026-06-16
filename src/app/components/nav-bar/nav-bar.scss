@@ -1,0 +1,10 @@
+@use '../../../styles/base/variables' as variables;
+
+.active-link {
+  background-color: variables.$secondary;
+  color: variables.$primary !important; // primary color
+
+  &.hover\:bg-secondary:hover {
+    background-color: variables.$primary !important;
+  }
+}

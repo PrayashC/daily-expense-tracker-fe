@@ -1,0 +1,43 @@
+/* ─── Core Palette ─── */
+$background: #fffbeb;
+$foreground: #1c1917;
+$card: #ffffff;
+$card-foreground: #1c1917;
+$popover: #ffffff;
+$popover-foreground: #1c1917;
+
+/* ─── Primary — Amber Yellow ─── */
+$primary: #d97706;
+$primary-foreground: #ffffff;
+
+/* ─── Secondary — Soft Amber ─── */
+$secondary: #fef3c7;
+$secondary-foreground: #92400e;
+
+/* ─── Muted ─── */
+$muted: #fef9ee;
+$muted-foreground: #a16207;
+
+/* ─── Accent — Light Amber ─── */
+$accent: #fde68a;
+$accent-foreground: #78350f;
+
+/* ─── Destructive ─── */
+$destructive: #dc2626;
+$destructive-foreground: #ffffff;
+
+/* ─── Borders & Inputs ─── */
+$border: rgba(217, 119, 6, 0.2);
+$input: rgba(217, 119, 6, 0.15);
+$input-background: #fffdf5;
+$switch-background: #d4a017;
+$ring: #f59e0b;
+
+/* ─── Extra Semantic Tokens ─── */
+$success: #059669;
+$success-foreground: #ffffff;
+$success-muted: #d1fae5;
+$income: #059669;
+$expense: #dc2626;
+$warning: #f59e0b;
+$info: #0ea5e9;
