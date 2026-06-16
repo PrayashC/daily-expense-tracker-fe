@@ -29,6 +29,7 @@ export class Expenses {
   errorMessage = '';
   calenderStartDate: string | null = null;
   calenderEndDate: string | null = null;
+  modalDataChanged = false;
 
   addForm: FormGroup = this.fb.group({
     description: ['', Validators.required],
@@ -85,6 +86,7 @@ export class Expenses {
     this.errorMessage = '';
     this.addForm.reset();
     this.editForm.reset();
+    this.modalDataChanged = false;
 
     this.expenseService.getExpensesByRange(dateStr, dateStr).subscribe({
       next: (entries) => {
@@ -106,8 +108,9 @@ export class Expenses {
     this.errorMessage = '';
     this.addForm.reset();
     this.editForm.reset();
-    if (this.calenderStartDate && this.calenderEndDate && this.editForm.statusChanges) {
+    if (this.calenderStartDate && this.calenderEndDate && this.modalDataChanged) {
       this.getCalenderRangeExpenses(this.calenderStartDate, this.calenderEndDate);
+      this.modalDataChanged = false;
     }
   }
 
@@ -132,6 +135,7 @@ export class Expenses {
         this.selectedDateExpenses.set(response);
         this.addForm.reset();
         this.errorMessage = '';
+        this.modalDataChanged = true;
       },
       error: () => {
         this.errorMessage = 'Failed to add expense. Please try again.';
@@ -173,6 +177,7 @@ export class Expenses {
         this.selectedDateExpenses.set(response);
         this.editingEntryId = null;
         this.errorMessage = '';
+        this.modalDataChanged = true;
       },
       error: () => {
         this.errorMessage = 'Failed to update expense. Please try again.';
@@ -185,6 +190,7 @@ export class Expenses {
       next: (response) => {
         this.selectedDateExpenses.set(response);
         this.errorMessage = '';
+        this.modalDataChanged = true;
         if (this.editingEntryId === entryId) {
           this.editingEntryId = null;
           this.editForm.reset();
