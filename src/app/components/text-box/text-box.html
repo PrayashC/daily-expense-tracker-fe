@@ -1,0 +1,23 @@
+<div class="flex flex-col gap-1 min-w-[250px]">
+  @if (label) {
+    <label [for]="id" class="txt-semibold-14px text-black">{{ label }}</label>
+  }
+  <input
+    [id]="id"
+    [type]="type"
+    [placeholder]="placeholder"
+    [value]="value"
+    (input)="onInput($event)"
+    (blur)="onBlur()"
+    [disabled]="disabled"
+    class="w-full px-4 py-2.5 rounded-xl border text-sm outline-none transition-colors txt-accent-dark"
+    [ngClass]="
+      control.invalid && control.touched
+        ? 'border-error bg-off-white'
+        : 'border-accent bg-background'
+    "
+  />
+  @if (errorMessage) {
+    <span class="text-xs text-red-500 mt-0.5">{{ errorMessage }}</span>
+  }
+</div>

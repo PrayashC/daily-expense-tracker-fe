@@ -1,13 +1,14 @@
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { combineLatest, finalize } from 'rxjs';
 import { UserService } from '../../services/user-service';
+import { TextBox } from '../../components/text-box/text-box';
 
 @Component({
   selector: 'app-signup',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, TextBox],
   templateUrl: './signup.html',
   styleUrl: './signup.scss',
 })
@@ -17,7 +18,8 @@ export class Signup implements OnInit {
   private readonly userService = inject(UserService);
   private readonly destroyRef = inject(DestroyRef);
 
-  protected loading = false;
+  loading = signal(true);
+  errorMessage = signal('');
 
   ngOnInit() {
     combineLatest([
@@ -44,24 +46,23 @@ export class Signup implements OnInit {
 
   protected readonly signupForm = this.fb.nonNullable.group({
     username: ['', [Validators.required]],
-    // email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
     confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
   });
 
   protected onSubmit(): void {
-    if (this.loading || this.signupForm.invalid) {
+    if (this.loading() || this.signupForm.invalid) {
       return;
     }
 
-    this.loading = true;
+    this.loading.set(true);
     const username = this.signupForm.controls['username'].value;
     const confirmPassword = this.signupForm.controls['confirmPassword'].value;
 
     this.userService
       .userSignin(username, confirmPassword)
       .pipe(
-        finalize(() => (this.loading = false)),
+        finalize(() => this.loading.set(false)),
         takeUntilDestroyed(this.destroyRef),
       )
       .subscribe({
@@ -71,7 +72,7 @@ export class Signup implements OnInit {
           }
         },
         error: (error) => {
-          console.log('Signup form submitted', this.signupForm.value);
+          this.errorMessage.set(error?.error?.message);
         },
       });
   }

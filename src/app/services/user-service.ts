@@ -10,7 +10,7 @@ export class UserService {
   loginAPI: string = '/api/user/log-in';
   signinAPI: string = '/api/user/register';
 
-  setToken(token: string, userId: string) {
+  setAuthInfo(token: string, userId: string) {
     localStorage.setItem('token', token);
     localStorage.setItem('userId', userId);
   }
@@ -24,7 +24,7 @@ export class UserService {
       .pipe(
         tap((res: any) => {
           if (res) {
-            this.setToken(res?.token, res?.userId);
+            this.setAuthInfo(res?.token, res?.userId);
           }
         }),
       );
@@ -38,7 +38,7 @@ export class UserService {
       .pipe(
         tap((res: any) => {
           if (res) {
-            this.setToken(res?.token, res?.userId);
+            this.setAuthInfo(res?.token, res?.userId);
           }
         }),
       );

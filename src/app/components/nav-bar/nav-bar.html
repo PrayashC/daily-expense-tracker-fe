@@ -2,42 +2,38 @@
   class="flex h-full w-full md:w-[250px] flex-row md:flex-col bg-background border-r border-muted"
 >
   <!-- Logo & App Name - hidden on small screens -->
-  <div class="hidden md:flex items-center gap-3 p-6 border-b border-muted">
-    <div
-      class="w-10 h-10 rounded-3xl flex items-center justify-center button-shadow-lg bg-yellow-gradient"
-    >
-      <i class="fa-solid fa-wallet text-2xl text-white"></i>
-    </div>
-
-    <div class="flex flex-col tracking-tight txt-bold-16px">
-      <span>Daily Expense</span>
-      <span class="txt-primary"> Tracker</span>
-    </div>
+  <div class="hidden md:flex">
+    <app-name-logo class="w-full"></app-name-logo>
   </div>
 
-  <!-- Navigation buttons -->
-  <div class="md:p-2 w-full flex md:flex-col txt-medium-14px">
-    <div class="w-1/2 md:w-full">
-      <button
-        class="flex-1 md:flex-none w-full md:rounded-xl flex items-center justify-center md:justify-start gap-2 px-4 py-3 transition-colors"
-        routerLink="/dashboard"
-        routerLinkActive="active-link"
-        [routerLinkActiveOptions]="{ exact: true }"
-      >
-        <i class="fa-solid fa-house me-1"></i>
-        <span>Dashboard</span>
-      </button>
-    </div>
+  <div class="flex flex-col justify-between h-full w-full">
+    <!-- Navigation buttons -->
+    <div class="md:p-2 w-full flex md:flex-col txt-medium-14px">
+      <div class="w-1/2 md:w-full">
+        <button
+          class="flex-1 md:flex-none w-full md:rounded-xl flex items-center justify-center md:justify-start gap-2 px-4 py-3 transition-colors"
+          routerLink="/dashboard"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <i class="fa-solid fa-house me-1"></i>
+          <span>Dashboard</span>
+        </button>
+      </div>
 
-    <div class="w-1/2 md:w-full">
-      <button
-        class="flex-1 md:flex-none w-full md:rounded-xl flex items-center justify-center md:justify-start gap-2 px-4 py-3 transition-colors"
-        routerLink="/dashboard/expenses"
-        routerLinkActive="active-link"
-      >
-        <i class="fa-regular fa-file-lines me-1"></i>
-        <span>Expenses</span>
-      </button>
+      <div class="w-1/2 md:w-full">
+        <button
+          class="flex-1 md:flex-none w-full md:rounded-xl flex items-center justify-center md:justify-start gap-2 px-4 py-3 transition-colors"
+          routerLink="/dashboard/expenses"
+          routerLinkActive="active-link"
+        >
+          <i class="fa-regular fa-file-lines me-1"></i>
+          <span>Expenses</span>
+        </button>
+      </div>
+    </div>
+    <div class="hidden md:flex p-2">
+      <app-logout class="w-full"></app-logout>
     </div>
   </div>
 </div>

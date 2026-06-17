@@ -10,6 +10,9 @@
 .txt-accent {
   color: $accent-foreground;
 }
+.txt-accent-dark {
+  color: $accent-dark;
+}
 .txt-success {
   color: $success;
 }
@@ -55,7 +58,9 @@
   background-color: $info;
   color: #fff;
 }
-
+.bg-off-white {
+  background-color: $off-white-red;
+}
 .bg-card {
   background-color: $card;
 }
@@ -90,6 +95,9 @@
 }
 .border-muted {
   border-color: $border;
+}
+.border-error {
+  border-color: $error;
 }
 
 /* ─── Button Styles ─── */

@@ -1,5 +1,5 @@
 <div class="min-h-screen w-full bg-background relative overflow-hidden">
-  <div class="flex flex-col justify-center items-center w-full h-full p-10">
+  <div class="flex flex-col justify-center items-center w-full h-full p-3 md:p-10">
     <div class="flex flex-col items-center justify-center pt-10 px-6">
       <div
         class="w-20 h-20 rounded-3xl flex items-center justify-center button-shadow-lg bg-yellow-gradient mb-5"
@@ -12,7 +12,9 @@
         <span class="txt-primary"> Tracker</span>
       </div>
     </div>
-    <router-outlet></router-outlet>
+    <div class="flex flex-col items-center justify-center p-5 md:p-10 px-0 md:px-6 min-w-[300px]">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 
   <div
