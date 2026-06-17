@@ -5,10 +5,11 @@ import { Router } from '@angular/router';
 import { combineLatest, finalize } from 'rxjs';
 import { UserService } from '../../services/user-service';
 import { TextBox } from '../../components/text-box/text-box';
+import { Button } from '../../components/button/button';
 
 @Component({
   selector: 'app-signup',
-  imports: [ReactiveFormsModule, TextBox],
+  imports: [ReactiveFormsModule, TextBox, Button],
   templateUrl: './signup.html',
   styleUrl: './signup.scss',
 })
@@ -18,7 +19,7 @@ export class Signup implements OnInit {
   private readonly userService = inject(UserService);
   private readonly destroyRef = inject(DestroyRef);
 
-  loading = signal(true);
+  loading = signal(false);
   errorMessage = signal('');
 
   ngOnInit() {

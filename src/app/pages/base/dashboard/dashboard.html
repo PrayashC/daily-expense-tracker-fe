@@ -4,13 +4,13 @@
     <p class="text-gray-500">Track your daily expenses effortlessly</p>
   </div>
 
-  <button
+  <app-button
+    variant="primary"
+    size="sm"
+    iconLeft="fa-solid fa-plus"
     (click)="toggleForm()"
-    class="px-6 py-3 rounded-2xl bg-yellow-gradient text-white txt-semibold-16px button-shadow-lg hover:opacity-90 transition-opacity"
-  >
-    <i class="fa-solid fa-plus mr-2"></i>
-    {{ showForm ? 'Cancel' : "Enter Today's Expense" }}
-  </button>
+    [text]="showForm ? 'Cancel' : 'Enter Today\'s Expense'"
+  />
 
   @if (showForm) {
     <div class="mt-8 w-full max-w-md">
@@ -39,14 +39,15 @@
           />
         </div>
 
-        <button
+        <app-button
+          variant="primary"
+          size="lg"
           type="submit"
+          [fullWidth]="true"
+          iconLeft="fa-solid fa-check"
           [disabled]="expenseForm.invalid"
-          class="w-full py-3 rounded-2xl bg-yellow-gradient text-white font-semibold button-shadow-lg hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          <i class="fa-solid fa-check mr-2"></i>
-          Add Expense
-        </button>
+          text="Add Expense"
+        />
       </form>
 
       @if (errorMessage) {

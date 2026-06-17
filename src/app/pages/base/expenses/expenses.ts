@@ -7,10 +7,11 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { ExpenseService } from '../../../services/expense-service';
 import { ExpenseData } from '../../../models/expense-data.model';
+import { Button } from '../../../components/button/button';
 
 @Component({
   selector: 'app-expenses',
-  imports: [FullCalendarModule, ReactiveFormsModule, DatePipe],
+  imports: [FullCalendarModule, ReactiveFormsModule, DatePipe, Button],
   templateUrl: './expenses.html',
   styleUrl: './expenses.scss',
 })

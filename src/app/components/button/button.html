@@ -1,0 +1,15 @@
+@if (variant !== 'link') {
+  <button [type]="type" [ngClass]="classes" [disabled]="disabled" (click)="handleClick($event)">
+    @if (loading) {
+      <i class="fa-solid fa-spinner me-2"></i>
+    }
+    @if (iconLeft && !loading) {
+      <i [class]="iconLeft"></i>
+    }
+    <span>{{ text }}</span>
+  </button>
+} @else {
+  <button type="button" [ngClass]="classes" (click)="handleClick($event)">
+    {{ text }}
+  </button>
+}

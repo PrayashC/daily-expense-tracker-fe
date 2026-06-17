@@ -49,23 +49,15 @@
   />
 
   <!-- Submit -->
-  <button
+  <app-button
+    variant="secondary"
+    size="sm"
     type="submit"
+    [fullWidth]="true"
+    [loading]="loading()"
     [disabled]="signupForm.invalid || loading()"
-    class="w-full mt-2 py-2.5 rounded-xl font-medium text-sm transition-all bg-yellow-gradient button-shadow inline-flex items-center justify-center"
-    [class]="
-      signupForm.invalid || loading()
-        ? 'opacity-50 cursor-not-allowed'
-        : 'hover:shadow-lg hover:brightness-105 cursor-pointer'
-    "
-  >
-    @if (loading()) {
-      <i class="fa-solid fa-spinner me-2"></i>
-      <span>Creating Account…</span>
-    } @else {
-      <span>Create Account</span>
-    }
-  </button>
+    [text]="loading() ? 'Creating Account…' : 'Create Account'"
+  />
   @if (errorMessage()) {
     <div class="mt-1 p-3 rounded-xl text-center txt-medium-14px bg-red-50 text-red-700">
       {{ errorMessage() }}
@@ -75,5 +67,5 @@
 
 <div class="flex justify-center mt-2">
   <span class="txt-accent txt-light-16px"> Already have an account? </span>&nbsp;
-  <button (click)="signIn()" class="txt-accent txt-medium-16px">Sign in</button>
+  <app-button variant="link" (click)="signIn()" text="Sign in" />
 </div>

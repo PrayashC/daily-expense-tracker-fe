@@ -5,10 +5,11 @@ import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
 import { UserService } from '../../services/user-service';
 import { TextBox } from '../../components/text-box/text-box';
+import { Button } from '../../components/button/button';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, TextBox],
+  imports: [ReactiveFormsModule, TextBox, Button],
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })

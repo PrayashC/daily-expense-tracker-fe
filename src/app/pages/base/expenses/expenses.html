@@ -153,14 +153,15 @@
               min="0.01"
               class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-yellow-400 focus:ring-2 focus:ring-yellow-100 outline-none transition-all"
             />
-            <button
+            <app-button
+              variant="primary"
+              size="lg"
               type="submit"
+              [fullWidth]="true"
+              iconLeft="fa-solid fa-plus"
               [disabled]="addForm.invalid"
-              class="w-full py-3 rounded-2xl bg-yellow-gradient text-white font-semibold button-shadow-lg hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              <i class="fa-solid fa-plus mr-2"></i>
-              Add Expense
-            </button>
+              text="Add Expense"
+            />
           </form>
         </div>
       </div>
