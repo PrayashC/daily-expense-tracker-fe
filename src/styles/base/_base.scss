@@ -3,6 +3,7 @@
 @use 'typography';
 @use 'shadows';
 @use 'gradients';
+@use 'animations';
 
 @include typography.generate-text-classes();
 

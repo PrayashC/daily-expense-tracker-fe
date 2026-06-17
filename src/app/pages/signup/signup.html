@@ -114,15 +114,20 @@
     <!-- Submit -->
     <button
       type="submit"
-      [disabled]="signupForm.invalid"
-      class="w-full mt-2 py-2.5 rounded-xl font-medium text-sm transition-all bg-yellow-gradient button-shadow"
+      [disabled]="signupForm.invalid || loading"
+      class="w-full mt-2 py-2.5 rounded-xl font-medium text-sm transition-all bg-yellow-gradient button-shadow inline-flex items-center justify-center gap-2"
       [class]="
-        signupForm.invalid
+        signupForm.invalid || loading
           ? 'opacity-50 cursor-not-allowed'
           : 'hover:shadow-lg hover:brightness-105 cursor-pointer'
       "
     >
-      Create Account
+      @if (loading) {
+        <i class="fa-solid fa-spinner"></i>
+        <span>Creating Account…</span>
+      } @else {
+        <span>Create Account</span>
+      }
     </button>
   </form>
 
