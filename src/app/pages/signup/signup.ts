@@ -36,7 +36,7 @@ export class Signup implements OnInit {
 
   protected readonly signupForm = this.fb.nonNullable.group({
     username: ['', [Validators.required]],
-    email: ['', [Validators.required, Validators.email]],
+    // email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
     confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
   });
