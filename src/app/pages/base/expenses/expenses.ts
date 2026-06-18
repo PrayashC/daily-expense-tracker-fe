@@ -1,4 +1,4 @@
-import { DatePipe } from '@angular/common';
+import { CurrencyPipe, DatePipe } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FullCalendarModule } from '@fullcalendar/angular';
@@ -8,10 +8,11 @@ import interactionPlugin from '@fullcalendar/interaction';
 import { ExpenseService } from '../../../services/expense-service';
 import { ExpenseData } from '../../../models/expense-data.model';
 import { Button } from '../../../components/button/button';
+import { Modal } from '../../../components/modal/modal';
 
 @Component({
   selector: 'app-expenses',
-  imports: [FullCalendarModule, ReactiveFormsModule, DatePipe, Button],
+  imports: [FullCalendarModule, ReactiveFormsModule, DatePipe, CurrencyPipe, Button, Modal],
   templateUrl: './expenses.html',
   styleUrl: './expenses.scss',
 })

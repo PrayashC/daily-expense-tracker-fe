@@ -1,16 +1,18 @@
-<div class="flex">
-  <div class="min-h-screen w-full bg-background">
+<div class="flex h-full">
+  <div class="min-h-screen w-full h-full bg-background">
     <div class="flex flex-col h-full md:flex-row justify-between md:justify-start">
       <div class="fixed w-full bg-background">
         <div class="md:hidden flex justify-between items-center">
           <app-name-logo></app-name-logo>
-          <app-logout></app-logout>
+          @if (isDashboard()) {
+            <app-logout></app-logout>
+          }
         </div>
       </div>
       <div class="fixed bottom-0 left-0 right-0 z-50 order-2 md:order-1 md:static md:z-auto">
         <app-nav-bar></app-nav-bar>
       </div>
-      <div class="order-1 md:order-2 p-3 md:p-8 w-full h-full py-[80px] md:pb-8">
+      <div class="order-1 md:order-2 px-3 md:p-8 w-full h-full pt-[80px] pb-[50px]">
         <div class="h-full bg-white card-shadow rounded-3xl p-5 md:p-10">
           <router-outlet></router-outlet>
         </div>

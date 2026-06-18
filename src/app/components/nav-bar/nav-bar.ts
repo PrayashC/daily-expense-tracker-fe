@@ -9,4 +9,10 @@ import { Logout } from '../logout/logout';
   templateUrl: './nav-bar.html',
   styleUrl: './nav-bar.scss',
 })
-export class NavBar {}
+export class NavBar {
+  navItems = [
+    { label: 'Dashboard', route: '/dashboard', icon: 'fa-solid fa-house', exact: true },
+    { label: 'Expenses', route: '/dashboard/expenses', icon: 'fa-regular fa-file-lines' },
+    { label: 'Reports', route: '/dashboard/reports', icon: 'fa-solid fa-chart-line' },
+  ];
+}

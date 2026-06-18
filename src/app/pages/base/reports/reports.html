@@ -1,0 +1,39 @@
+<div class="flex flex-col h-full">
+  <div class="flex justify-between items-center mb-6">
+    <span class="txt-bold-28px tracking-tight">Reports</span>
+    <select
+      [value]="selectedRange()"
+      (change)="onRangeChange($event)"
+      class="px-4 py-2.5 rounded-xl border border-gray-200 focus:border-yellow-400 focus:ring-2 focus:ring-yellow-100 outline-none transition-all txt-medium-14px bg-white"
+    >
+      <option value="7d">Last 7 Days</option>
+      <option value="30d">Last 30 Days</option>
+      <option value="3m">Last 3 Months</option>
+      <option value="12m">Last 12 Months</option>
+      <option value="5y">Last 5 Years</option>
+    </select>
+  </div>
+
+  @if (spendReport(); as report) {
+    <div class="h-full overflow-auto">
+      <div class="flex-1 min-h-0">
+        <div echarts [options]="chartOptions()" class="w-full h-full min-h-[350px]"></div>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+        @for (card of summaryCards(); track card.label) {
+          <div class="p-4 rounded-xl bg-gray-50 border border-gray-200">
+            <p class="text-xs text-gray-400 uppercase tracking-wide">{{ card.label }}</p>
+            <p class="txt-semibold-16px md:txt-semibold-20px {{ card.color }} mt-1">
+              {{ card.value | currency: 'INR' : 'symbol' : '1.2-2' }}
+            </p>
+          </div>
+        }
+      </div>
+    </div>
+  } @else {
+    <div class="flex-1 flex items-center justify-center">
+      <p class="text-gray-400">No data available for this range.</p>
+    </div>
+  }
+</div>

@@ -1,0 +1,15 @@
+@if (isOpen) {
+  <!-- Modal Backdrop -->
+  <div
+    class="fixed inset-0 bg-black/50 z-40 flex items-center justify-center p-4"
+    (click)="backdropClick.emit()"
+  >
+    <!-- Modal Content -->
+    <div
+      class="bg-white rounded-3xl w-full max-w-lg max-h-[80vh] flex flex-col shadow-2xl p-3"
+      (click)="$event.stopPropagation()"
+    >
+      <ng-content></ng-content>
+    </div>
+  </div>
+}

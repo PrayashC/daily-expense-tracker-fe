@@ -1,4 +1,4 @@
-<div class="flex flex-col items-center">
+<div class="flex flex-col items-center h-full">
   <div class="text-center mb-8">
     <span class="txt-bold-28px tracking-tight mb-2">Welcome Back!</span>
     <p class="text-gray-500">Track your daily expenses effortlessly</p>
@@ -59,9 +59,9 @@
   }
 
   @if (!showForm) {
-    <div class="mt-8 w-full max-w-md">
-      <h2 class="txt-semibold-20px mb-4 text-gray-800">Today's Expenses</h2>
-      <div class="space-y-3 h-40 md:h-70 overflow-auto">
+    <h2 class="mt-8 txt-semibold-20px mb-4 text-gray-800">Today's Expenses</h2>
+    <div class="w-full h-full max-w-md overflow-auto">
+      <div class="space-y-3 min-h-40 overflow-auto">
         @if (expenses().length > 0) {
           @for (expense of expenses(); track expense) {
             <div
@@ -71,7 +71,9 @@
                 <p class="font-medium text-gray-800">{{ expense.description }}</p>
                 <p class="text-xs text-gray-400 mt-1">{{ expense.entryDate | date: 'short' }}</p>
               </div>
-              <span class="text-yellow-600 font-semibold text-lg">₹{{ expense.amount }}</span>
+              <span class="text-yellow-600 font-semibold text-lg">{{
+                expense.amount | currency: 'INR' : 'symbol' : '1.2-2'
+              }}</span>
             </div>
           }
         } @else {

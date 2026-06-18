@@ -6,6 +6,7 @@ import { Base } from './base/base';
 import { authGuard } from '../guards/auth-guard';
 import { Dashboard } from './base/dashboard/dashboard';
 import { Expenses } from './base/expenses/expenses';
+import { Reports } from './base/reports/reports';
 
 export const pagesRoutes: Routes = [
   {
@@ -23,6 +24,7 @@ export const pagesRoutes: Routes = [
     children: [
       { path: '', component: Dashboard },
       { path: 'expenses', component: Expenses },
+      { path: 'reports', component: Reports },
     ],
   },
 ];

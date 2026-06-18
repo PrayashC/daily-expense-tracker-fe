@@ -2,169 +2,159 @@
   <full-calendar class="h-full" [options]="calendarOptions" [events]="events()"></full-calendar>
 </div>
 
-@if (showModal()) {
-  <!-- Modal Backdrop -->
-  <div
-    class="fixed inset-0 bg-black/50 z-40 flex items-center justify-center p-4"
-    (click)="closeModal()"
-  >
-    <!-- Modal Content -->
-    <div
-      class="bg-white rounded-3xl w-full max-w-lg max-h-[80vh] flex flex-col shadow-2xl p-3"
-      (click)="$event.stopPropagation()"
+<app-modal [isOpen]="showModal()" (backdropClick)="closeModal()">
+  <!-- Header -->
+  <div class="flex items-start justify-between p-5 pr-0 border-b border-gray-100">
+    <h2 class="txt-semibold-20px text-gray-800">
+      Expenses for {{ selectedDate | date: 'dd/MM/yyyy' }}
+    </h2>
+    <button
+      (click)="closeModal()"
+      class="text-gray-400 text-center hover:text-gray-600 text-xl leading-none p-1"
     >
-      <!-- Header -->
-      <div class="flex items-center justify-between p-5 border-b border-gray-100">
-        <h2 class="txt-semibold-20px text-gray-800">
-          Expenses for {{ selectedDate | date: 'dd/MM/yyyy' }}
-        </h2>
-        <button
-          (click)="closeModal()"
-          class="text-gray-400 hover:text-gray-600 text-2xl leading-none p-1"
-        >
-          &times;
-        </button>
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+
+  <!-- Body -->
+  <div class="flex-1 overflow-auto p-5 space-y-4">
+    <!-- Error Message -->
+    @if (errorMessage) {
+      <div class="p-3 rounded-xl text-center txt-medium-14px bg-red-50 text-red-700">
+        {{ errorMessage }}
       </div>
+    }
 
-      <!-- Body -->
-      <div class="flex-1 overflow-auto p-5 space-y-4">
-        <!-- Error Message -->
-        @if (errorMessage) {
-          <div class="p-3 rounded-xl text-center txt-medium-14px bg-red-50 text-red-700">
-            {{ errorMessage }}
-          </div>
-        }
-
-        <!-- Expenses List -->
-        @if (selectedDateExpenses().length > 0) {
-          <div class="space-y-3">
-            @for (entry of selectedDateExpenses(); track entry.id) {
-              <div class="p-4 rounded-xl bg-gray-50 border border-gray-200">
-                @if (editingEntryId === entry.id) {
-                  <!-- Edit Mode -->
-                  <form [formGroup]="editForm" (ngSubmit)="saveEdit(entry.id!)" class="space-y-3">
-                    <input
-                      type="text"
-                      formControlName="description"
-                      placeholder="Description"
-                      class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:border-yellow-400 focus:ring-2 focus:ring-yellow-100 outline-none transition-all text-sm"
-                    />
-                    <input
-                      type="number"
-                      formControlName="amount"
-                      placeholder="Amount"
-                      step="0.01"
-                      min="0.01"
-                      class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:border-yellow-400 focus:ring-2 focus:ring-yellow-100 outline-none transition-all text-sm"
-                    />
-                    <div class="flex gap-2">
-                      <button
-                        type="submit"
-                        [disabled]="editForm.invalid"
-                        class="flex-1 py-2 rounded-xl bg-yellow-gradient text-white txt-semibold-14px hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
-                      >
-                        <i class="fa-solid fa-check mr-1"></i> Save
-                      </button>
-                      <button
-                        type="button"
-                        (click)="cancelEdit()"
-                        class="flex-1 py-2 rounded-xl bg-gray-200 text-gray-700 txt-semibold-14px hover:bg-gray-300 transition-colors"
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                  </form>
-                } @else {
-                  <!-- Display Mode -->
-                  <div class="flex justify-between items-center">
+    <!-- Expenses List -->
+    @if (selectedDateExpenses().length > 0) {
+      <div class="space-y-3">
+        @for (entry of selectedDateExpenses(); track entry.id) {
+          <div class="p-4 rounded-xl bg-gray-50 border border-gray-200">
+            @if (editingEntryId === entry.id) {
+              <!-- Edit Mode -->
+              <form [formGroup]="editForm" (ngSubmit)="saveEdit(entry.id!)" class="space-y-3">
+                <input
+                  type="text"
+                  formControlName="description"
+                  placeholder="Description"
+                  class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:border-yellow-400 focus:ring-2 focus:ring-yellow-100 outline-none transition-all text-sm"
+                />
+                <input
+                  type="number"
+                  formControlName="amount"
+                  placeholder="Amount"
+                  step="0.01"
+                  min="0.01"
+                  class="w-full px-3 py-2 rounded-lg border border-gray-200 focus:border-yellow-400 focus:ring-2 focus:ring-yellow-100 outline-none transition-all text-sm"
+                />
+                <div class="flex gap-2">
+                  <button
+                    type="submit"
+                    [disabled]="editForm.invalid"
+                    class="flex-1 py-2 rounded-xl bg-yellow-gradient text-white txt-semibold-14px hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    <i class="fa-solid fa-check mr-1"></i> Save
+                  </button>
+                  <button
+                    type="button"
+                    (click)="cancelEdit()"
+                    class="flex-1 py-2 rounded-xl bg-gray-200 text-gray-700 txt-semibold-14px hover:bg-gray-300 transition-colors"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            } @else {
+              <!-- Display Mode -->
+              <div class="flex justify-between items-center">
+                <div class="flex-1">
+                  <p class="font-medium text-gray-800">{{ entry.description }}</p>
+                  <p class="text-xs text-gray-400 mt-1">
+                    {{ entry.entryDate | date: 'dd/MM/yyyy' }}
+                  </p>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="text-yellow-600 font-semibold text-lg">{{
+                    entry.amount | currency: 'INR' : 'symbol' : '1.2-2'
+                  }}</span>
+                  <button
+                    (click)="startEdit(entry)"
+                    class="text-blue-500 hover:text-blue-700 transition-colors"
+                    title="Edit"
+                  >
+                    <i class="fa-solid fa-pen-to-square"></i>
+                  </button>
+                  <button
+                    (click)="confirmEntryDelete = entry.id"
+                    class="text-red-500 hover:text-red-700 transition-colors"
+                    title="Delete"
+                  >
+                    <i class="fa-solid fa-trash-can"></i>
+                  </button>
+                </div>
+              </div>
+              @if (confirmEntryDelete === entry.id) {
+                <div class="mt-3 p-3 rounded-xl bg-red-50 border border-red-200">
+                  <div class="flex items-start gap-3">
+                    <i class="fa-solid fa-triangle-exclamation text-red-500 mt-0.5"></i>
                     <div class="flex-1">
-                      <p class="font-medium text-gray-800">{{ entry.description }}</p>
-                      <p class="text-xs text-gray-400 mt-1">
-                        {{ entry.entryDate | date: 'dd/MM/yyyy' }}
+                      <p class="txt-medium-14px text-red-800 mb-3">
+                        This entry will be permanently deleted. Continue?
                       </p>
-                    </div>
-                    <div class="flex items-center gap-3">
-                      <span class="text-yellow-600 font-semibold text-lg">₹{{ entry.amount }}</span>
-                      <button
-                        (click)="startEdit(entry)"
-                        class="text-blue-500 hover:text-blue-700 transition-colors"
-                        title="Edit"
-                      >
-                        <i class="fa-solid fa-pen-to-square"></i>
-                      </button>
-                      <button
-                        (click)="confirmEntryDelete = entry.id"
-                        class="text-red-500 hover:text-red-700 transition-colors"
-                        title="Delete"
-                      >
-                        <i class="fa-solid fa-trash-can"></i>
-                      </button>
-                    </div>
-                  </div>
-                  @if (confirmEntryDelete === entry.id) {
-                    <div class="mt-3 p-3 rounded-xl bg-red-50 border border-red-200">
-                      <div class="flex items-start gap-3">
-                        <i class="fa-solid fa-triangle-exclamation text-red-500 mt-0.5"></i>
-                        <div class="flex-1">
-                          <p class="txt-medium-14px text-red-800 mb-3">
-                            This entry will be permanently deleted. Continue?
-                          </p>
-                          <div class="flex gap-2">
-                            <button
-                              (click)="confirmEntryDelete = undefined"
-                              class="flex-1 py-2 rounded-xl bg-gray-200 text-gray-700 txt-semibold-14px hover:bg-gray-300 transition-colors"
-                            >
-                              <i class="fa-solid fa-xmark mr-1"></i> No
-                            </button>
-                            <button
-                              (click)="deleteEntry(entry.id!)"
-                              class="flex-1 py-2 rounded-xl bg-red-500 text-white txt-semibold-14px hover:bg-red-600 transition-colors"
-                            >
-                              <i class="fa-solid fa-trash-can mr-1"></i> Yes, Delete
-                            </button>
-                          </div>
-                        </div>
+                      <div class="flex gap-2">
+                        <button
+                          (click)="confirmEntryDelete = undefined"
+                          class="flex-1 py-2 rounded-xl bg-gray-200 text-gray-700 txt-semibold-14px hover:bg-gray-300 transition-colors"
+                        >
+                          <i class="fa-solid fa-xmark mr-1"></i> No
+                        </button>
+                        <button
+                          (click)="deleteEntry(entry.id!)"
+                          class="flex-1 py-2 rounded-xl bg-red-500 text-white txt-semibold-14px hover:bg-red-600 transition-colors"
+                        >
+                          <i class="fa-solid fa-trash-can mr-1"></i> Yes, Delete
+                        </button>
                       </div>
                     </div>
-                  }
-                }
-              </div>
+                  </div>
+                </div>
+              }
             }
           </div>
-        } @else {
-          <p class="text-center text-gray-400 py-8">No expenses logged for this date.</p>
         }
-
-        <!-- Add New Entry Form -->
-        <div class="border-t border-gray-100 pt-4">
-          <h3 class="txt-semibold-16px text-gray-700 mb-3">Add New Entry</h3>
-          <form [formGroup]="addForm" (ngSubmit)="addEntry()" class="space-y-3">
-            <input
-              type="text"
-              formControlName="description"
-              placeholder="e.g. Lunch, Groceries..."
-              class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-yellow-400 focus:ring-2 focus:ring-yellow-100 outline-none transition-all"
-            />
-            <input
-              type="number"
-              formControlName="amount"
-              placeholder="e.g. 250.00"
-              step="0.01"
-              min="0.01"
-              class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-yellow-400 focus:ring-2 focus:ring-yellow-100 outline-none transition-all"
-            />
-            <app-button
-              variant="primary"
-              size="lg"
-              type="submit"
-              [fullWidth]="true"
-              iconLeft="fa-solid fa-plus"
-              [disabled]="addForm.invalid"
-              text="Add Expense"
-            />
-          </form>
-        </div>
       </div>
+    } @else {
+      <p class="text-center text-gray-400 py-8">No expenses logged for this date.</p>
+    }
+
+    <!-- Add New Entry Form -->
+    <div class="border-t border-gray-100 pt-4">
+      <h3 class="txt-semibold-16px text-gray-700 mb-3">Add New Entry</h3>
+      <form [formGroup]="addForm" (ngSubmit)="addEntry()" class="space-y-3">
+        <input
+          type="text"
+          formControlName="description"
+          placeholder="e.g. Lunch, Groceries..."
+          class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-yellow-400 focus:ring-2 focus:ring-yellow-100 outline-none transition-all"
+        />
+        <input
+          type="number"
+          formControlName="amount"
+          placeholder="e.g. 250.00"
+          step="0.01"
+          min="0.01"
+          class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-yellow-400 focus:ring-2 focus:ring-yellow-100 outline-none transition-all"
+        />
+        <app-button
+          variant="primary"
+          size="lg"
+          type="submit"
+          [fullWidth]="true"
+          iconLeft="fa-solid fa-plus"
+          [disabled]="addForm.invalid"
+          text="Add Expense"
+        />
+      </form>
     </div>
   </div>
-}
+</app-modal>

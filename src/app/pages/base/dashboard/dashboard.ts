@@ -1,4 +1,4 @@
-import { DatePipe } from '@angular/common';
+import { CurrencyPipe, DatePipe } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ExpenseService } from '../../../services/expense-service';
@@ -7,7 +7,7 @@ import { ExpenseData } from '../../../models/expense-data.model';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [ReactiveFormsModule, DatePipe, Button],
+  imports: [ReactiveFormsModule, DatePipe, CurrencyPipe, Button],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
 })

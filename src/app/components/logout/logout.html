@@ -2,3 +2,27 @@
   <i class="fa-solid fa-arrow-right-from-bracket"></i>
   <span class="logout-label">Logout</span>
 </button>
+
+<app-modal [isOpen]="confirmLogout()" (backdropClick)="cancelLogout()">
+  <div class="p-5 flex flex-col items-center text-center">
+    <div class="w-16 h-16 rounded-full bg-red-50 flex items-center justify-center mb-4">
+      <i class="fa-solid fa-arrow-right-from-bracket text-red-500 text-xl"></i>
+    </div>
+    <h2 class="txt-semibold-20px text-gray-800 mb-2">Confirm Logout</h2>
+    <p class="txt-medium-14px text-gray-500 mb-6 max-w-xs">Are you sure you want to log out?</p>
+    <div class="flex gap-3 w-full">
+      <button
+        (click)="cancelLogout()"
+        class="flex-1 py-3 rounded-xl bg-gray-100 text-gray-700 txt-semibold-14px hover:bg-gray-200 transition-colors"
+      >
+        <i class="fa-solid fa-xmark mr-1"></i> Cancel
+      </button>
+      <button
+        (click)="confirmLogoutAction()"
+        class="flex-1 py-3 rounded-xl bg-red-500 text-white txt-semibold-14px hover:bg-red-600 transition-colors"
+      >
+        <i class="fa-solid fa-check mr-1"></i> Yes, Logout
+      </button>
+    </div>
+  </div>
+</app-modal>

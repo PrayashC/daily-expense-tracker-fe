@@ -2,6 +2,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { inject, Injectable } from '@angular/core';
 import { HttpService } from './http-service';
 import { ExpenseData } from '../models/expense-data.model';
+import { SpendReport } from '../models/spend-report.model';
 
 @Injectable({
   providedIn: 'root',
@@ -41,6 +42,11 @@ export class ExpenseService {
   public deleteExpenseEntry(entryId: string): Observable<ExpenseData[]> {
     const api = `/api/expenses/entries/${entryId}`;
     return this.httpService.delete(api) as Observable<ExpenseData[]>;
+  }
+
+  public getSpendReport(startDate: string, endDate: string): Observable<SpendReport> {
+    const api = `/api/expenses/spend-report`;
+    return this.httpService.get(api, { startDate, endDate }) as Observable<SpendReport>;
   }
 
   public updateTodayExpenses(expenses: ExpenseData[]): void {
