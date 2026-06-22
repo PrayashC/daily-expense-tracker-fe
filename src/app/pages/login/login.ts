@@ -35,8 +35,9 @@ export class Login {
     this.loading.set(true);
     const username = this.loginForm.controls['username'].value;
     const password = this.loginForm.controls['password'].value;
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     this.userService
-      .userLogin(username, password)
+      .userLogin(username, password, timezone)
       .pipe(
         finalize(() => this.loading.set(false)),
         takeUntilDestroyed(this.destroyRef),

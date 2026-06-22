@@ -15,11 +15,12 @@ export class UserService {
     localStorage.setItem('userId', userId);
   }
 
-  public userLogin(username: string, pass: any) {
+  public userLogin(username: string, pass: any, timezone: string = 'UTC') {
     return this.httpService
       .post(`${this.loginAPI}`, {
         username: username,
         password: pass,
+        timezone: timezone,
       })
       .pipe(
         tap((res: any) => {
@@ -29,11 +30,12 @@ export class UserService {
         }),
       );
   }
-  public userSignin(username: string, pass: any) {
+  public userSignin(username: string, pass: any, timezone: string = 'UTC') {
     return this.httpService
       .post(`${this.signinAPI}`, {
         username: username,
         password: pass,
+        timezone: timezone,
       })
       .pipe(
         tap((res: any) => {

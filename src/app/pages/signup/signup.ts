@@ -59,9 +59,10 @@ export class Signup implements OnInit {
     this.loading.set(true);
     const username = this.signupForm.controls['username'].value;
     const confirmPassword = this.signupForm.controls['confirmPassword'].value;
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
     this.userService
-      .userSignin(username, confirmPassword)
+      .userSignin(username, confirmPassword, timezone)
       .pipe(
         finalize(() => this.loading.set(false)),
         takeUntilDestroyed(this.destroyRef),
